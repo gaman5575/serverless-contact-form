@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<form id="contactForm" action="https://<api-id>.execute-api.ap-south-1.amazonaws.com/prod/submit" method="POST">
+    <input type="text" name="name" placeholder="Name"><br>
+    <input type="email" name="email" placeholder="Email"><br>
+    <textarea name="message" placeholder="Message"></textarea><br>
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+      await fetch(form.action, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+		'x-api-key': '<Api-key>'
+        },
+        body: JSON.stringify(data)
+      });
+      alert('Form submitted!');
+    });
+  </script>
+</body>
+</html>
